@@ -203,29 +203,29 @@ Hình 1 dưới đây minh họa trực quan phân bố điểm hài lòng TMĐT
 
 Quan sát Hình 1 cho thấy không chỉ trung bình (đường ngang trong box) mà cả phân bố điểm hài lòng đều tăng dần từ Gen X đến Millennials và Gen Z. Cụ thể, median của Gen Z cao nhất, tiếp theo là Millennials, và thấp nhất là Gen X. Độ phân tán (chiều cao của box và whiskers) của các nhóm tương đối tương đồng, củng cố nhận định về sự khác biệt có hệ thống giữa các thế hệ. Không có outliers cực đoan trong dữ liệu.
 
-#### 4.2. Kiểm tra giả định trước ANOVA
+#### 4.2. Kiểm tra giả định ANOVA
 
-##### 4.2.1. Giả định phân phối chuẩn
+Sau khi fit mô hình ANOVA, cần kiểm tra các giả định để đảm bảo tính hợp lệ của kết quả.
 
-**Về mặt lý thuyết**, ANOVA yêu cầu **phần dư (residuals)** của mô hình có phân phối chuẩn. Residuals được tính sau khi fit mô hình: \(\text{residual}_i = y_i - \bar{y}_{\text{nhóm}_i}\). Trong thực hành, có hai cách kiểm tra:
+##### 4.2.1. Giả định phân phối chuẩn của residuals
 
-**Cách 1: Kiểm tra từng nhóm** (cách tiếp cận thực tế)
+**Giả định**: ANOVA yêu cầu **residuals (phần dư)** của mô hình có phân phối chuẩn N(0, σ²).
 
-Nếu dữ liệu trong từng nhóm có phân phối gần chuẩn, thì residuals của mô hình cũng sẽ có phân phối chuẩn. Kiểm định Shapiro–Wilk cho từng nhóm:
+Residuals được tính sau khi fit mô hình: \(\text{residual}_i = y_i - \bar{y}_{\text{nhóm}_i}\), là sai lệch giữa giá trị quan sát và trung bình nhóm.
 
-- **Gen X**: W = 0.9735, p < 0.001
-- **Millennials**: W = 0.9499, p < 0.001
-- **Gen Z**: W = 0.9263, p < 0.001
+**Kiểm định Shapiro-Wilk cho residuals**:
+- W = 0.9918
+- p = 3.25 × 10⁻⁶
 
-Các p-value < 0.05 cho thấy có bằng chứng về sự lệch khỏi phân phối chuẩn trong từng nhóm.
+Với p < 0.05, có bằng chứng về vi phạm nhẹ giả định phân phối chuẩn.
 
-**Cách 2: Kiểm tra residuals trực tiếp** (cách chính thức)
-
-Để trực quan hóa giả định một cách chính xác, Hình 2 trình bày Q-Q plot của **residuals từ mô hình ANOVA** so với phân phối chuẩn lý thuyết.
+**QQ Plot (Hình 2)**:
 
 ![Hình 2. Q-Q plot: Kiểm tra tính chuẩn của residuals](fig4_qqplot_residuals.png)
 
-Hình 2 cho thấy các điểm residuals nằm khá sát với đường thẳng lý thuyết (màu đỏ), chỉ có một số điểm ở hai đuôi lệch nhẹ. **Giả định phân phối chuẩn bị vi phạm** (Shapiro-Wilk: p < 0.001 cho cả 3 nhóm và residuals). Tuy nhiên, theo lý thuyết, ANOVA tương đối robust (vững) với vi phạm giả định chuẩn khi: (1) cỡ mẫu lớn và bằng nhau giữa các nhóm (n=400 mỗi nhóm), (2) phân phối tương đối đối xứng (skewness < |1|), và (3) vi phạm không quá nghiêm trọng theo QQ plot (Field, 2013). Để kiểm chứng tính vững vàng của kết luận, nghiên cứu sử dụng thêm kiểm định phi tham số Kruskal-Wallis (không yêu cầu giả định phân phối chuẩn) và kết quả cho thấy sự nhất quán (xem mục 4.5).
+Hình 2 trình bày Q-Q plot của residuals từ mô hình ANOVA so với phân phối chuẩn lý thuyết. Các điểm residuals nằm khá sát với đường thẳng lý thuyết (màu đỏ), chỉ có một số điểm ở hai đuôi lệch nhẹ. Điều này cho thấy **vi phạm nhẹ** giả định phân phối chuẩn.
+
+Tuy nhiên, theo lý thuyết, ANOVA tương đối robust (vững) với vi phạm giả định chuẩn khi: (1) cỡ mẫu lớn và bằng nhau giữa các nhóm (n=400 mỗi nhóm), (2) phân phối tương đối đối xứng, và (3) vi phạm không quá nghiêm trọng theo QQ plot (Field, 2013). Để kiểm chứng tính vững vàng của kết luận, nghiên cứu sử dụng thêm kiểm định phi tham số Kruskal-Wallis (xem mục 4.5).
 
 ##### 4.2.2. Giả định đồng nhất phương sai (Levene test)
 
@@ -239,9 +239,9 @@ Kiểm định Levene cho ba nhóm thế hệ cho kết quả:
 
 | Giả định           | Phương pháp kiểm tra | Kết quả | Kết luận |
 |-------------------|---------------------|---------|----------|
-| Phân phối chuẩn   | Shapiro-Wilk (từng nhóm) | p < 0.001 | **Vi phạm**, nhưng ANOVA robust với n lớn cân bằng |
-| Phân phối chuẩn   | QQ plot (residuals) | Hình 2 | **Vi phạm nhẹ**, residuals gần chuẩn |
-| Đồng nhất phương sai | Levene test | F=11.83, p<0.001 | **Vi phạm**, nhưng tỷ lệ phương sai=1.42<3, chấp nhận được |
+| Phân phối chuẩn residuals | Shapiro-Wilk | W=0.9918, p=3.25×10⁻⁶ | **Vi phạm nhẹ**, ANOVA robust với n lớn cân bằng |
+| Phân phối chuẩn residuals | QQ plot | Hình 2 | Residuals gần chuẩn, lệch nhẹ ở đuôi |
+| Đồng nhất phương sai | Levene test | F=11.83, p<0.001 | **Vi phạm**, nhưng tỷ lệ=1.42<3, chấp nhận được |
 
 #### 4.3. Kết quả One-way ANOVA
 
