@@ -6,7 +6,9 @@ Nghiên cứu này phân tích mức độ hài lòng với thương mại đi�
 
 ## Kết quả chính
 
-- **Độ tin cậy thang đo**: Cronbach's Alpha = 0.969 (xuất sắc)
+- **Độ tin cậy thang đo**:
+  - Cronbach's Alpha = 0.969 (xuất sắc)
+  - Tương quan trung bình giữa các mục hỏi = 0.757 (cao)
 - **Gen Z** có mức độ hài lòng cao nhất (M = 4.19, SD = 0.48)
 - **Millennials** có mức độ hài lòng trung bình (M = 3.88, SD = 0.53)
 - **Gen X** có mức độ hài lòng thấp nhất (M = 3.41, SD = 0.57)
@@ -22,8 +24,10 @@ oneway-anova/
 ├── survey_questionnaire.md                        # Phiếu khảo sát
 ├── survey_data.csv                                # Dữ liệu khảo sát (n = 1200)
 ├── ecommerce_satisfaction.ipynb                   # Jupyter notebook phân tích
-├── ecommerce_anova_report.md                      # Báo cáo nghiên cứu đầy đủ
+├── ecommerce_anova_report.md                      # Báo cáo nghiên cứu đầy đủ (Markdown)
+├── ecommerce_anova_report.pdf                     # Báo cáo nghiên cứu đầy đủ (PDF)
 ├── analysis_results.json                          # Kết quả phân tích (JSON)
+├── VALIDATION_REPORT.md                           # Báo cáo kiểm tra toàn bộ project
 ├── CHANGELOG.md                                   # Nhật ký thay đổi
 ├── SUMMARY.md                                     # Tóm tắt công việc
 ├── fig1_boxplot_satisfaction_by_generation.png    # Boxplot
@@ -94,13 +98,15 @@ jupyter notebook ecommerce_satisfaction.ipynb
 
 ### Phân tích thống kê
 1. Thống kê mô tả (mean, SD, n)
-2. Kiểm tra giả định:
-   - Shapiro-Wilk test (phân phối chuẩn)
-   - Levene test (đồng nhất phương sai)
+2. Kiểm tra độ tin cậy: Cronbach's alpha
 3. One-way ANOVA
-4. Kiểm định hậu nghiệm: Tukey HSD
-5. Effect size: η² (eta squared)
-6. Robustness check: Kruskal-Wallis test
+4. Kiểm tra giả định ANOVA:
+   - Shapiro-Wilk test (phân phối chuẩn của residuals)
+   - Levene test (đồng nhất phương sai)
+   - QQ plot (kiểm tra trực quan phân phối chuẩn của residuals)
+5. Kiểm định hậu nghiệm: Tukey HSD
+6. Effect size: η² (eta squared)
+7. Robustness check: Kruskal-Wallis test
 
 ## Kết luận
 
