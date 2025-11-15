@@ -18,12 +18,14 @@ Nghiên cứu này phân tích mức độ hài lòng với thương mại đi�
 
 ```
 oneway-anova/
-├── README.md                              # File này
-├── survey_questionnaire.md                # Phiếu khảo sát
-├── survey_data.csv                        # Dữ liệu khảo sát (n = 1200)
-├── ecommerce_satisfaction.ipynb           # Jupyter notebook phân tích
-├── ecommerce_anova_report.md              # Báo cáo nghiên cứu đầy đủ (Markdown)
-├── ecommerce_anova_report.pdf             # Báo cáo nghiên cứu đầy đủ (PDF)
+├── README.md                                      # File này
+├── survey_questionnaire.md                        # Phiếu khảo sát
+├── survey_data.csv                                # Dữ liệu khảo sát (n = 1200)
+├── ecommerce_satisfaction.ipynb                   # Jupyter notebook phân tích
+├── ecommerce_anova_report.md                      # Báo cáo nghiên cứu đầy đủ
+├── analysis_results.json                          # Kết quả phân tích (JSON)
+├── CHANGELOG.md                                   # Nhật ký thay đổi
+├── SUMMARY.md                                     # Tóm tắt công việc
 ├── fig1_boxplot_satisfaction_by_generation.png    # Boxplot
 ├── fig2_hist_satisfaction_overall.png             # Histogram
 ├── fig3_violin_satisfaction_by_generation.png     # Violin plot
